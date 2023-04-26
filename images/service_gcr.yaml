@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: fractal-faas-images
+spec:
+  template:
+    spec:
+      containers:
+        - image: europe-west3-docker.pkg.dev/fractal-functions/images/images:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: TARGET
+              value: "Image functions"

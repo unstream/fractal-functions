@@ -1,0 +1,17 @@
+image-service-url: ${IMAGE_SERVICE_URL:http://localhost:8081/computePng}
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: false
+  enable-native-support: true
+server:
+  port: 8080
+
+spring:
+  cloud:
+    function:
+      web:
+#        path: /functions
+  codec:
+    max-in-memory-size: 10MB
+

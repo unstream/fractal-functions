@@ -1,0 +1,15 @@
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: false
+  enable-native-support: true
+server:
+  port: 8081
+
+spring:
+  cloud:
+    function:
+      web:
+#        path: /functions
+  codec:
+    max-in-memory-size: 10MB

@@ -1,0 +1,93 @@
+POST http://localhost:8080/reverse
+Content-Type: text/plain
+
+Ingo
+
+###
+
+POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/mandelbrotPng
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 255
+}
+
+###
+
+POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/mandelbrotPng
+Content-Type: image/png
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk2OTcxODA4Nzk2ODI5YTk3MmU3OWE5ZDFhOWZmZjExY2Q2MWIxZTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA4MjkxNjkxMzg5Mzk5ODQzNjUxIiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGFkZXNzby5kZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoieXNDdEs0MHN3MmF5aEZLMmQzOU1PQSIsImlhdCI6MTY4MTkyODA4MCwiZXhwIjoxNjgxOTMxNjgwfQ.cGLTcuFxOtmrPmWUHY-TOokPdfLkNSMHI4etzN-n1QjFKw6YXjuPmeAa701-dyiZTpPorV1bWNbTYlW22utSqjrftCJmzSWLsdO7DiiBC8KSNXfFiAfkHOv_RAkK4QOwnBlk3H1PFij6cfbDSpPWMnWaWFBoHDAkkeLcNdZd5UiBl29JyFok7tQKbwvIIjK1k6-U0euJFfZhAKCfbNoa0owj2fmXDbYOv2ZUUUQCVPsaUIgS6cTTCJEnrn0MwiZx0U1hKLNUzvx0655-YCIV3acpHHdVgD9UXP66whR8A2IZ5lZtSNtOL-44r3ngOEXOIeVCIIH-a-qWLh8yqqHpPQ
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 200,
+  "height": 200,
+  "maxIterations": 255
+}
+
+###
+
+
+POST http://localhost:8080/mandelbrot
+Content-Type: text/plain
+
+Ingo
+
+###
+
+POST http://localhost:8081/computePng
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+###
+POST https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+###
+
+
+
+POST http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+###
+fractal-faas-images.default.cluster.local
+{route}.{namespace}.svc.cluster.local
