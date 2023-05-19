@@ -28,18 +28,10 @@ public class MandelbrotService {
     public MandelbrotService() {
     }
 
-
-
     @Autowired
     Function<Fractal, Quad> mandelbrotFunction;
 
-//    @Bean
-//    @RouterOperations({
-//            @RouterOperation(method = RequestMethod.GET, operation = @Operation(description = "Compute a mandelbrot image", operationId = "mandelbrotGET", tags = "positions",
-//                    responses = @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = Quad.class))))),
-//            @RouterOperation(method = RequestMethod.POST, operation = @Operation(description = "Compute a mandelbrot image", operationId = "mandelbrotPOST", tags = "positions",
-//                    responses = @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = Quad.class)))))
-//    })
+
     @Bean
     public Function<Fractal, byte[]> mandelbrotPng(){
         return fractal -> {

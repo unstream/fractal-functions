@@ -47,7 +47,7 @@ public class CreateImage {
 						int r = 0;
 						int g = 0;
 						int b = color;
-						ImageLineHelper.setPixelRGB8(iline, y, r, g, b); // orange-ish gradient
+						ImageLineHelper.setPixelRGB8(iline, y, r, g, b);
 					}
 					png.writeRow(iline);
 				}
