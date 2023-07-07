@@ -3,6 +3,8 @@ package io.unstream.fractal.mandelbrot.functions;
 import io.unstream.fractal.mandelbrot.entity.Fractal;
 import io.unstream.fractal.mandelbrot.entity.Quad;
 import org.apache.commons.math3.complex.Complex;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,9 @@ import java.util.stream.IntStream;
  */
 @Component
 public class MandelbrotFunction {
+
+    private final static Logger LOG = LoggerFactory.getLogger(MandelbrotFunction.class);
+
     public MandelbrotFunction() {
     }
 
@@ -36,6 +41,7 @@ public class MandelbrotFunction {
                     var r = f.apply(z);
                     data.setXY(x, y, r);
                 }
+                LOG.info("Log closed.");
             });
             return data;
         };

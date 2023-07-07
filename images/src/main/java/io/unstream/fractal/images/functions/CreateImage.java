@@ -28,18 +28,16 @@ public class CreateImage {
 				LOG.info("Starting to compute image ... ");
 				LOG.info("Quad: " +  quad.getWidth() + ", " + quad.getHeight());
 				ImageInfo imi = new ImageInfo(quad.getWidth(), quad.getHeight(), 8, false); // 8 bits per channel, no alpha
-				// open image for writing to a output stream
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream((int) imi.getTotalRawBytes());
 
 				PngWriter png = new PngWriter(outputStream, imi);
-				// add some optional metadata (chunks)
 				png.getMetadata().setDpi(100.0);
 				png.getMetadata().setTimeNow(0);
 				png.getMetadata().setText(PngChunkTextVar.KEY_Title, "Fractal");
 				png.getMetadata().setText("Imagetype", "Mandelbrot Set");
-				for (int x = 0; x < imi.cols; x++) { // this line will be written to all rows
+				for (int y = 0; y < imi.rows; y++) {
 					ImageLineInt iline = new ImageLineInt(imi);
-					for (int y = 0; y < imi.rows; y++) {
+					for (int x = 0; x < imi.cols; x++) {
 						int color = quad.getData()[y][x];
 						if (color > 255) {
 							color = 255;
@@ -47,7 +45,7 @@ public class CreateImage {
 						int r = 0;
 						int g = 0;
 						int b = color;
-						ImageLineHelper.setPixelRGB8(iline, y, r, g, b);
+						ImageLineHelper.setPixelRGB8(iline, x, r, g, b);
 					}
 					png.writeRow(iline);
 				}
