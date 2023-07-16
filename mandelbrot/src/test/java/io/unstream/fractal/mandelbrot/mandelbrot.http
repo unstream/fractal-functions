@@ -61,6 +61,51 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MD
 }
 
 ###
+
+### images-api-0uj24t637h55t.apigateway.fractal-functions.cloud.goog
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/fastMandelbrot?key=AIzaSyDeY5XvOPnZOoIv5wC6XfN7V3St9_CDcCI
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 1000
+}
+
+
+
+###
+
+POST http://localhost:8084/fastMandelbrot
+Content-Type: image/png
+#Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MDUwNjYyZTU0YmNiMWFkYjViNWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExODQ5NzUzNDU3MDEwNTAzMjc3IiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiaWdqazZYWVBpeFdSQXdtZ3JiNDVmZyIsImlhdCI6MTY4NDI0MzMzMywiZXhwIjoxNjg0MjQ2OTMzfQ.vYG9IwhQh3QvUzQoXAqEZLHlFHNpuOjXBIvvbNr_fzF600Q-xOt5lzv4tGN70K6YTOQqjcYtgsTlp-uN4UOhat6up8l_YJt7R4jPOElsavIKEuKB4a566aDNuZdbtQ0R10kzyOG-G_3NGqXfg6ZZapX5U3R7rawTPWoxNfMDQ3EcCjhK2amgk58f33al3qC5ElvaNmuBpronDF_54cLsT4lq283tzg6PGNuTf7yJEC3j1mEE2Qgxg3heC1zz9iGZOowllHdX0T5VVuywj-6yee0P2NUCxVHv0o_ANYktBYF5GOVob3O9LdStpottoZuVUIb5Px3-KBNm0WQ2SMeYZw
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 500,
+  "height": 500,
+  "maxIterations": 70
+}
+
+###
+
+GET http://localhost:8084/fastMandelbrot/%7B%22c0%22%3A-1.5%22%7D
+
+
+###
+
+GET http://localhost:8081/api/v1/mandelbrot?max_iterations=2000&w=2000&h=2000
+Content-Type: image/png
+
+
+###
 POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/mandelbrotPng
 Content-Type: image/png
 Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MDUwNjYyZTU0YmNiMWFkYjViNWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExODQ5NzUzNDU3MDEwNTAzMjc3IiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiaWdqazZYWVBpeFdSQXdtZ3JiNDVmZyIsImlhdCI6MTY4NDI0MzMzMywiZXhwIjoxNjg0MjQ2OTMzfQ.vYG9IwhQh3QvUzQoXAqEZLHlFHNpuOjXBIvvbNr_fzF600Q-xOt5lzv4tGN70K6YTOQqjcYtgsTlp-uN4UOhat6up8l_YJt7R4jPOElsavIKEuKB4a566aDNuZdbtQ0R10kzyOG-G_3NGqXfg6ZZapX5U3R7rawTPWoxNfMDQ3EcCjhK2amgk58f33al3qC5ElvaNmuBpronDF_54cLsT4lq283tzg6PGNuTf7yJEC3j1mEE2Qgxg3heC1zz9iGZOowllHdX0T5VVuywj-6yee0P2NUCxVHv0o_ANYktBYF5GOVob3O9LdStpottoZuVUIb5Px3-KBNm0WQ2SMeYZw
@@ -76,22 +121,22 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MD
 }
 
 ###
-#POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/mandelbrotPng
-POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/createFractal
+POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/mandelbrotPng
+#POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/createFractal
 Content-Type: image/png
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijk5YmNiMDY5MzQwYTNmMTQ3NDYyNzk0ZGZlZmE3NWU3OTk2MTM2MzQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExODQ5NzUzNDU3MDEwNTAzMjc3IiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiQTNGdUh2VW5iMi1YcTJUeVUtek40dyIsImlhdCI6MTY4ODQyMTE5NywiZXhwIjoxNjg4NDI0Nzk3fQ.hvnjB0jWpOV3MYI77AxjLBI5Nt5aTfnlMj24aDUUY_QUqdq8ignb1zvDUHrXspsKji1sjRgwdlapoIws95kKj3rEkBnMgz92ylcUZvneWyVT1594optgCfxyyuO-HNdAKQ2FBaUMSF5B-GHybRXmbyjVuTjP8_nD4LyvGW2SGThrLZZz3m5QFdQ9QmaNdiurvt8jdcXAvv-PqUjy-weEvR-Vj4a21aFFmwS8C_SjGTB4IXigmcxkvNfRoekk9MTtVnswdbCIc93m7DS1VDJJZb0oHuAod0w5R2g2YSYGTbtRcBUCMuMR7tr00OfZve0vTXsYed8lyGWH01O8IjvLMQ
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjY3NmRhOWQzMTJjMzlhNDI5OTMyZjU0M2U2YzFiNmU2NTEyZTQ5ODMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExODQ5NzUzNDU3MDEwNTAzMjc3IiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiWGI4ekJCVklmMm4wdmhBbTBtNzBXZyIsImlhdCI6MTY4OTI2NDM1NSwiZXhwIjoxNjg5MjY3OTU1fQ.Yl2Tf-Tjlk34rXkSV4rxctVeylVXAnQsIrwCwdCqb359OiS1DwAYO2E4ZcBp4a8FUOx82OQBoSJuEh8df4gWralKitEFzaPXtKtG8aKV0Z6duDdVFmEwpnmz0bsztew2R2mERQyZbbpGdNzoVvL_iyyt1Z92VxuM9KYMMyzRXhOgbFMXj_1sDYX5T-5Gu6Q4Z4nlqkm3nqtE84zlcdaqffR1_8rbutH0Wd_0FNID4nYeG0OwEDfTJ-jI0acQ1G7sBa0tssRiwkx8qnI2wmze0pfdwunsD9f51Kr5wYhQLIpygvjocGuU-SsOoOwTIU_yiCxR4MhCo8vxAdab2H5R2g
 
 {
   "c0": -1.5,
   "c0i": -1,
   "c1": 0.5,
   "c1i": 1,
-  "width": 600,
-  "height": 600,
-  "maxIterations": 255
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 1000
 }
-
 ###
+
 
 # curl -X 'POST'
 #  'http://localhost:8081/combineImages'
@@ -188,6 +233,21 @@ Content-Type: image/png
   "height": 1,
   "width": 1
 }
+
+### images-api-0uj24t637h55t.apigateway.fractal-functions.cloud.goog
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computePng?key=AIzaSyDeY5XvOPnZOoIv5wC6XfN7V3St9_CDcCI
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
 
 ###
 POST https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng

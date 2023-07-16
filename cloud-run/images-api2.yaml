@@ -1,0 +1,90 @@
+# openapi2-run.yaml
+swagger: '2.0'
+info:
+  title: API_ID Images API
+  description: Images API on API Gateway with a Cloud Run backend
+  version: 1.0.0
+schemes:
+  - https
+
+paths:
+  /computePng/{computePng}:
+    get:
+      summary: "Compute fractal image"
+      description: computePng function
+      operationId: computePng_GET
+      x-google-backend:
+        address: https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng
+      security:
+        - api_key: []
+      parameters:
+        - name: "computePng"
+          in: "path"
+          description: "ID of pet that needs to be updated"
+          required: true
+          type: string
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: "#/definitions/Image"
+  /computePng:
+    post:
+      description: computePng function
+      operationId: computePng_POST
+      x-google-backend:
+        address: https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng
+      security:
+        - api_key: [ ]
+      produces:
+        - "image/png"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Image array"
+          required: true
+          schema:
+            $ref: "#/definitions/Quad"
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: "#/definitions/Image"
+
+
+definitions:
+  Image:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: string
+          format: byte
+      height:
+        type: integer
+        format: int32
+      width:
+        type: integer
+        format: int32
+  Quad:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          type: array
+          items:
+            type: integer
+            format: int32
+      height:
+        type: integer
+        format: int32
+      width:
+        type: integer
+        format: int32
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"

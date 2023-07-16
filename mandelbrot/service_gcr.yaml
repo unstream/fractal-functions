@@ -6,12 +6,12 @@ spec:
   template:
     spec:
       containers:
-        - image: europe-west3-docker.pkg.dev/fractal-functions/images/mandelbrot:latest
+        - image: europe-west3-docker.pkg.dev/fractal-functions/images/mandelbrot:LATEST
           resources:
             limits:
               memory: 1000Mi
           ports:
-            - containerPort: 8080
+            - containerPort: 8084
           env:
             - name: IMAGE_SERVICE_URL
               value: "https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng"

@@ -15,6 +15,7 @@ public class Quad {
     private Integer[][] data;
     private int height;
     private int width;
+    private int maxValue;
 
     public Quad(int width, int height) {
         this.width = width;

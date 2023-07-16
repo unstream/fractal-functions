@@ -1,21 +1,34 @@
 package io.unstream.fractal.mandelbrot.functions;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.unstream.fractal.mandelbrot.entity.Fractal;
 import io.unstream.fractal.mandelbrot.entity.Quad;
+import jakarta.websocket.server.PathParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.core.annotations.RouterOperation;
+import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
@@ -77,6 +90,44 @@ public class FractalService {
 
             return imageData;
         };
+    }
+
+    @Bean
+//    @RouterOperations(value = {
+//            @RouterOperation(method = RequestMethod.GET,
+//                    operation = @Operation(description = "Compute Fractal GET", operationId = "fastMandelbrotGET",
+//                    parameters = { @Parameter(name = "in", in = ParameterIn.PATH,
+//                            description = "Fractal definition",
+//                            required = true,
+//                            schema = @Schema(implementation = Fractal.class)
+//                    )},
+//                    responses = @ApiResponse(responseCode = "200", description = "Image", content = @Content(mediaType = "image/png")))
+//            ),
+//            @RouterOperation(method = RequestMethod.POST, operation = @Operation(description = "Compute Fractal", operationId = "fastMandelbrot",
+//                    requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+//                            description = "ReDe",
+//                            content = @Content(
+//                                    mediaType = "application/json",
+//                                    schema = @Schema(implementation = Fractal.class),
+//                                    examples = {
+//                                            @ExampleObject(
+//                                                    name = "Fractal values",
+//                                                    summary = "The whole mandelbrot set",
+//                                                    value =
+//                                                            "{\n" +
+//                                                                    "  \"c0\": -1.5,\n" +
+//                                                                    "  \"c0i\": -1,\n" +
+//                                                                    "  \"c1\": 0.5,\n" +
+//                                                                    "  \"c1i\": 1,\n" +
+//                                                                    "  \"width\": 500,\n" +
+//                                                                    "  \"height\": 500,\n" +
+//                                                                    "  \"maxIterations\": 70\n" +
+//                                                                    "}"
+//                                            )})),
+//                    responses = @ApiResponse(responseCode = "200", description = "Image", content = @Content(mediaType = "image/png"))
+//            ))})
+    public Function<Fractal, byte[]>  fastMandelbrot() {
+        return new CreateImage().computePng().compose(new MandelbrotFunction().mandelbrotQuad());
     }
 
     private static Fractal getFractalSlice(Fractal fractal, int i) {

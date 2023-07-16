@@ -6,14 +6,16 @@ springdoc:
   swagger-ui:
     use-root-path: false
   enable-native-support: true
+  default-produces-media-type: image/png
 server:
-  port: 8080
+  forward-headers-strategy: framework
+  port: 8084
 
 spring:
-  cloud:
-    function:
-      web:
-#        path: /functions
+  #  cloud:
+#    function:
+#      web:
+##        path: /functions
   codec:
     max-in-memory-size: 10MB
 
