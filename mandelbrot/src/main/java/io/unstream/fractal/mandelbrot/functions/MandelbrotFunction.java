@@ -1,16 +1,15 @@
 package io.unstream.fractal.mandelbrot.functions;
 
 import io.unstream.fractal.mandelbrot.entity.Fractal;
+import io.unstream.fractal.mandelbrot.entity.MandelbrotIterationDTO;
 import io.unstream.fractal.mandelbrot.entity.Quad;
 import org.apache.commons.math3.complex.Complex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
+
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -30,23 +29,27 @@ public class MandelbrotFunction {
     public Function<Fractal, Quad> mandelbrotQuad(){
         return fractal -> {
             long now = System.currentTimeMillis();
-            MandelbrotIteration f = new MandelbrotIteration(fractal.getMaxIterations());
 
             var data = new Quad(fractal.getWidth(), fractal.getHeight());
             data.setMaxValue(fractal.getMaxIterations());
+            MandelbrotIteration mandelbrotIteration = new MandelbrotIteration();
+            Function<MandelbrotIterationDTO, Integer> iterateZ = mandelbrotIteration.iterateZ();
+
             var width = fractal.getC1() - fractal.getC0();
             var height = fractal.getC1i() - fractal.getC0i();
             var xstep = width / fractal.getWidth();
             var ystep = height / fractal.getHeight();
 
-            var executor = Executors.newFixedThreadPool(20);
+            var executor = Executors.newFixedThreadPool(25);
+
             try  { //newVirtualThreadPerTaskExecutor() newFixedThreadPool(20)
                 IntStream.rangeClosed(0, fractal.getWidth() - 1).forEach(x -> {
                     executor.execute(() -> {
                         var z0 = xstep * x + fractal.getC0();
                         for (int y = 0; y < fractal.getHeight(); y++) {
                             var z = new Complex(z0, ystep * y + fractal.getC0i());
-                            var r = f.apply(z);
+                            var r = iterateZ.apply(new MandelbrotIterationDTO(z, fractal.getMaxIterations()));
+                            //var r = MandelbrotIteration.iterateZ2(z0, fractal.getC0i() + y * ystep, fractal.getMaxIterations());
                             data.setXY(x, y, r);
                         }
                     });

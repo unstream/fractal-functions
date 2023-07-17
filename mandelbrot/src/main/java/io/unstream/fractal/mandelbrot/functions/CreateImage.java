@@ -34,10 +34,10 @@ public class CreateImage {
 				ByteArrayOutputStream outputStream = new ByteArrayOutputStream((int) imageInfo.getTotalRawBytes());
 
 				PngWriter png = new PngWriter(outputStream, imageInfo);
-				png.getMetadata().setDpi(100.0);
-				png.getMetadata().setTimeNow(0);
-				png.getMetadata().setText(PngChunkTextVar.KEY_Title, "Fractal");
-				png.getMetadata().setText("Imagetype", "Mandelbrot Set");
+//				png.getMetadata().setDpi(100.0);
+//				png.getMetadata().setTimeNow(0);
+//				png.getMetadata().setText(PngChunkTextVar.KEY_Title, "Fractal");
+//				png.getMetadata().setText("Imagetype", "Mandelbrot Set");
 
 				for (int y = 0; y < imageInfo.rows; y++) {
 					ImageLineInt line = new ImageLineInt(imageInfo);

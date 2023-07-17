@@ -63,7 +63,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MD
 ###
 
 ### images-api-0uj24t637h55t.apigateway.fractal-functions.cloud.goog
-POST https://fractal-gateway-8191wl1t.nw.gateway.dev/fastMandelbrot?key=AIzaSyDeY5XvOPnZOoIv5wC6XfN7V3St9_CDcCI
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/fastMandelbrot?key={{api-key}}
 Content-Type: image/png
 
 {
@@ -71,9 +71,9 @@ Content-Type: image/png
   "c0i": -1,
   "c1": 0.5,
   "c1i": 1,
-  "width": 1000,
-  "height": 1000,
-  "maxIterations": 1000
+  "width": 300,
+  "height": 300,
+  "maxIterations": 10000
 }
 
 
@@ -89,15 +89,10 @@ Content-Type: image/png
   "c0i": -1,
   "c1": 0.5,
   "c1i": 1,
-  "width": 500,
-  "height": 500,
-  "maxIterations": 70
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 1000
 }
-
-###
-
-GET http://localhost:8084/fastMandelbrot/%7B%22c0%22%3A-1.5%22%7D
-
 
 ###
 
@@ -108,7 +103,7 @@ Content-Type: image/png
 ###
 POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/mandelbrotPng
 Content-Type: image/png
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MDUwNjYyZTU0YmNiMWFkYjViNWYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExODQ5NzUzNDU3MDEwNTAzMjc3IiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiaWdqazZYWVBpeFdSQXdtZ3JiNDVmZyIsImlhdCI6MTY4NDI0MzMzMywiZXhwIjoxNjg0MjQ2OTMzfQ.vYG9IwhQh3QvUzQoXAqEZLHlFHNpuOjXBIvvbNr_fzF600Q-xOt5lzv4tGN70K6YTOQqjcYtgsTlp-uN4UOhat6up8l_YJt7R4jPOElsavIKEuKB4a566aDNuZdbtQ0R10kzyOG-G_3NGqXfg6ZZapX5U3R7rawTPWoxNfMDQ3EcCjhK2amgk58f33al3qC5ElvaNmuBpronDF_54cLsT4lq283tzg6PGNuTf7yJEC3j1mEE2Qgxg3heC1zz9iGZOowllHdX0T5VVuywj-6yee0P2NUCxVHv0o_ANYktBYF5GOVob3O9LdStpottoZuVUIb5Px3-KBNm0WQ2SMeYZw
+Authorization: Bearer {{id-token}}
 
 {
   "c0": -1.5,
@@ -124,7 +119,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjgyMjgzOGMxYzhiZjllZGNmMWY1MD
 POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/mandelbrotPng
 #POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/createFractal
 Content-Type: image/png
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjY3NmRhOWQzMTJjMzlhNDI5OTMyZjU0M2U2YzFiNmU2NTEyZTQ5ODMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzMjU1NTk0MDU1OS5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjMyNTU1OTQwNTU5LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTExODQ5NzUzNDU3MDEwNTAzMjc3IiwiZW1haWwiOiJpbmdvLndlaWNoc2VsQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiWGI4ekJCVklmMm4wdmhBbTBtNzBXZyIsImlhdCI6MTY4OTI2NDM1NSwiZXhwIjoxNjg5MjY3OTU1fQ.Yl2Tf-Tjlk34rXkSV4rxctVeylVXAnQsIrwCwdCqb359OiS1DwAYO2E4ZcBp4a8FUOx82OQBoSJuEh8df4gWralKitEFzaPXtKtG8aKV0Z6duDdVFmEwpnmz0bsztew2R2mERQyZbbpGdNzoVvL_iyyt1Z92VxuM9KYMMyzRXhOgbFMXj_1sDYX5T-5Gu6Q4Z4nlqkm3nqtE84zlcdaqffR1_8rbutH0Wd_0FNID4nYeG0OwEDfTJ-jI0acQ1G7sBa0tssRiwkx8qnI2wmze0pfdwunsD9f51Kr5wYhQLIpygvjocGuU-SsOoOwTIU_yiCxR4MhCo8vxAdab2H5R2g
+Authorization: Bearer {{id-token}}
 
 {
   "c0": -1.5,
@@ -235,7 +230,7 @@ Content-Type: image/png
 }
 
 ### images-api-0uj24t637h55t.apigateway.fractal-functions.cloud.goog
-POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computePng?key=AIzaSyDeY5XvOPnZOoIv5wC6XfN7V3St9_CDcCI
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computePng?key={{api-key}}
 Content-Type: image/png
 
 {
