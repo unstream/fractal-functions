@@ -1,4 +1,4 @@
 steps:
-  - name: maven:3.3-jdk-17
+  - name: eclipse-temurin:17-jdk
     entrypoint: mvn
     args: ['--version']
