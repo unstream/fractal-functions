@@ -11,4 +11,4 @@ spec:
             - containerPort: 8081
           env:
             - name: TARGET
-              value: "Image functions"
+              value: "Image functions 2"

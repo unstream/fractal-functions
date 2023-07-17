@@ -5,6 +5,9 @@ metadata:
   namespace: default
 spec:
   template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/min-scale: "3"
     spec:
       containers:
         - image: dev.local/images:1.0.0

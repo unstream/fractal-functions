@@ -1,9 +1,11 @@
 package io.unstream.fractal.mandelbrot.entity;
 
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @NoArgsConstructor
 @AllArgsConstructor

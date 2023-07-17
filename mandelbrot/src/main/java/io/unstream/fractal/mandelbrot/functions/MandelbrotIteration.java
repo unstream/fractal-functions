@@ -1,37 +1,50 @@
 package io.unstream.fractal.mandelbrot.functions;
 
+import io.unstream.fractal.mandelbrot.entity.MandelbrotIterationDTO;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.math3.complex.Complex;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
 
-public class MandelbrotIteration implements Function<Complex, Integer>  {
-	final private int maxIterations;
-	
-	public MandelbrotIteration(final int maxIterations) {
-		this.maxIterations = maxIterations;
-	}
-	
-	@Override
-	public Integer apply(Complex z) {
+@Component
+public class MandelbrotIteration {
+	public static int iterateZ2(double zr, double zi, int maxIterations) {
 		int i = 0;
-		double x = 0;
-		double y = 0;
+		double x = 0, y = 0;
 		double x2, y2;
 		do {
 			x2 = x * x;
 			y2 = y * y;
-			y = 2 * x * y + z.getImaginary();
-			x = x2 - y2 + z.getReal();
+			y = 2 * x * y + zi;
+			x = x2 - y2 + zr;
 			i++;
 		} while (i < maxIterations && (x2 + y2) < 4);
 		return i;
-//		double nsmooth;
-//		if (i == maxIterations) {
-//			nsmooth = i;
-//		} else {
-//			//nsmooth = 1d + i - Math.log(Math.log(Math.sqrt(x*x + y*y)))/Math.log(2);
-//			nsmooth = i;
-//		}
-//		return nsmooth;
+	};
+
+	@Bean
+	public Function<MandelbrotIterationDTO, Integer> iterateZ() {
+		return (dto) -> {
+			double zr = dto.getZ().getReal();
+			double zi = dto.getZ().getImaginary();
+			int maxIterations = dto.getMaxIteration();
+			int i = 0;
+			double x = 0, y = 0;
+			double x2, y2;
+			do {
+				x2 = x * x;
+				y2 = y * y;
+				y = 2 * x * y + zi;
+				x = x2 - y2 + zr;
+				i++;
+			} while (i < maxIterations && (x2 + y2) < 4);
+			return i;
+		};
 	}
+
 }

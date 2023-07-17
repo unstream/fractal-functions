@@ -1,17 +1,21 @@
-image-service-url: ${IMAGE_SERVICE_URL:http://localhost:8081/computePng}
+image-service-url: ${IMAGE_SERVICE_URL:http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng}
+#mandelbrot-service-url: ${MANDELBROT_SERVICE_URL:http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/mandelbrotQuad}
+mandelbrot-service-url: ${MANDELBROT_SERVICE_URL:http://127.0.0.1:8080/mandelbrotQuad}
 springdoc:
   version: '@springdoc.version@'
   swagger-ui:
     use-root-path: false
   enable-native-support: true
+  default-produces-media-type: image/png
 server:
-  port: 8080
+  forward-headers-strategy: framework
+  port: 8084
 
 spring:
-  cloud:
-    function:
-      web:
-#        path: /functions
+  #  cloud:
+#    function:
+#      web:
+##        path: /functions
   codec:
     max-in-memory-size: 10MB
 

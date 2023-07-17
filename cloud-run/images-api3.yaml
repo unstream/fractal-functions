@@ -1,0 +1,145 @@
+openapi: 3.0.1
+info:
+  title: Images API
+  license:
+    name: Apache 2.0
+    url: http://springdoc.org
+  version: '@springdoc.version@'
+servers:
+  - url: http://fractal-faas-images-caskxmpsyq-ey.a.run.app
+    description: Generated server url
+paths:
+  /combineImages:
+    post:
+      description: combineImages function
+      operationId: combineImages_POST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Image'
+          text/plain:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Image'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Image'
+  /combineImages/{combineImages}:
+    get:
+      description: combineImages function
+      operationId: combineImages_GET
+      parameters:
+        - name: combineImages
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Image'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Image'
+  /computePng:
+    post:
+      description: computePng function
+      operationId: computePng_POST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quad'
+          text/plain:
+            schema:
+              $ref: '#/components/schemas/Quad'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+  /computePng/{computePng}:
+    get:
+      description: computePng function
+      operationId: computePng_GET
+      parameters:
+        - name: computePng
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Quad'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: byte
+components:
+  schemas:
+    Image:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+            format: byte
+        height:
+          type: integer
+          format: int32
+        width:
+          type: integer
+          format: int32
+    Quad:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+            items:
+              type: integer
+              format: int32
+        height:
+          type: integer
+          format: int32
+        width:
+          type: integer
+          format: int32
