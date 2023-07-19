@@ -1,7 +1,7 @@
-package io.unstream.fractal.mandelbrot.functions;
+package io.unstream.fractal;
 
-import io.unstream.fractal.mandelbrot.entity.Fractal;
-import io.unstream.fractal.mandelbrot.entity.Quad;
+import de.adesso.mandelbrot.functions.mandelbrot.entity.Fractal;
+import de.adesso.mandelbrot.functions.images.entity.ImageData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -53,7 +53,7 @@ public class TileFunctions {
             // ........xxxxxxx.
             // If the fractal width is just smaller then the tile width, the the fractal fits in 4-9 tiles
             //
-            var data = new Quad(fractal.getWidth(), fractal.getHeight());
+            var data = new ImageData(fractal.getWidth(), fractal.getHeight());
             var width = fractal.getC1() - fractal.getC0();
             var height = fractal.getC1i() - fractal.getC0i();
             var max = Math.max(width, height);
@@ -123,7 +123,7 @@ public class TileFunctions {
             // ........xxxxxxx.
             // If the fractal width is just smaller then the tile width, the the fractal fits in 4-9 tiles
             //
-            var data = new Quad(fractal.getWidth(), fractal.getHeight());
+            var data = new ImageData(fractal.getWidth(), fractal.getHeight());
             var width = fractal.getC1() - fractal.getC0();
             var height = fractal.getC1i() - fractal.getC0i();
             var max = Math.max(width, height);

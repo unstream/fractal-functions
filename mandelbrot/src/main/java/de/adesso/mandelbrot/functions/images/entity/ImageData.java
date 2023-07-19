@@ -1,23 +1,21 @@
-package io.unstream.fractal.mandelbrot.entity;
+package de.adesso.mandelbrot.functions.images.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Arrays;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class Quad {
+public class ImageData {
     private Integer[][] data;
     private int height;
     private int width;
     private int maxValue;
 
-    public Quad(int width, int height) {
+    public ImageData(int width, int height) {
         this.width = width;
         this.height = height;
         data = new Integer[height][width];

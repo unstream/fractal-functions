@@ -1,39 +1,43 @@
-package io.unstream.fractal.mandelbrot.functions;
+package de.adesso.mandelbrot.functions.mandelbrot.functions;
 
-import io.unstream.fractal.mandelbrot.entity.Fractal;
-import io.unstream.fractal.mandelbrot.entity.MandelbrotIterationDTO;
-import io.unstream.fractal.mandelbrot.entity.Quad;
-import org.apache.commons.math3.complex.Complex;
+import de.adesso.mandelbrot.functions.images.entity.ImageData;
+import de.adesso.mandelbrot.functions.images.functions.ImageFunction;
+import de.adesso.mandelbrot.functions.mandelbrot.entity.Fractal;
+import de.adesso.mandelbrot.functions.mandelbrot.entity.IterationParameters;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.core.annotations.RouterOperation;
+import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import java.util.concurrent.Executors;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-/**
- * @author Ingo Weichsel
- */
 @Component
-public class MandelbrotFunction {
+public class MandelbrotData {
 
-    private final static Logger LOG = LoggerFactory.getLogger(MandelbrotFunction.class);
+    private final static Logger LOG = LoggerFactory.getLogger(MandelbrotData.class);
 
-    public MandelbrotFunction() {
-    }
-
-    @Bean
-    public Function<Fractal, Quad> mandelbrotQuad(){
+    @RouterOperations(value = {
+            @RouterOperation(method = RequestMethod.POST, operation	= @Operation(
+                    description = "Compute the mandelbrot set data with the iteration count per set point",
+                    tags = "mandelbrot")),
+            @RouterOperation(method = RequestMethod.GET, operation = @Operation(hidden = true))
+    })@Bean
+    public Function<Fractal, ImageData> computeMandelbrotSet(){
         return fractal -> {
             long now = System.currentTimeMillis();
 
-            var data = new Quad(fractal.getWidth(), fractal.getHeight());
+            var data = new ImageData(fractal.getWidth(), fractal.getHeight());
             data.setMaxValue(fractal.getMaxIterations());
+
             MandelbrotIteration mandelbrotIteration = new MandelbrotIteration();
-            Function<MandelbrotIterationDTO, Integer> iterateZ = mandelbrotIteration.iterateZ();
+            Function<IterationParameters, Integer> iterateZ = mandelbrotIteration.completeIterationSequence();
 
             var width = fractal.getC1() - fractal.getC0();
             var height = fractal.getC1i() - fractal.getC0i();
@@ -42,14 +46,13 @@ public class MandelbrotFunction {
 
             var executor = Executors.newFixedThreadPool(25);
 
-            try  { //newVirtualThreadPerTaskExecutor() newFixedThreadPool(20)
+            try  {
                 IntStream.rangeClosed(0, fractal.getWidth() - 1).forEach(x -> {
                     executor.execute(() -> {
-                        var z0 = xstep * x + fractal.getC0();
+                        var zr = xstep * x + fractal.getC0();
                         for (int y = 0; y < fractal.getHeight(); y++) {
-                            var z = new Complex(z0, ystep * y + fractal.getC0i());
-                            var r = iterateZ.apply(new MandelbrotIterationDTO(z, fractal.getMaxIterations()));
-                            //var r = MandelbrotIteration.iterateZ2(z0, fractal.getC0i() + y * ystep, fractal.getMaxIterations());
+                            var zi = ystep * y + fractal.getC0i();
+                            var r = iterateZ.apply(new IterationParameters(zr, zi , fractal.getMaxIterations()));
                             data.setXY(x, y, r);
                         }
                     });

@@ -1,23 +1,16 @@
-package io.unstream.fractal.mandelbrot.entity;
+package de.adesso.mandelbrot.functions.images.control;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+import de.adesso.mandelbrot.functions.images.entity.Color;
+
 public class Gradient {
     public static final int MAP_SIZE = 1000;
-    public static final int MAX_COLOR = 255;
     private int maxValue;
     private Color[] colorMap = new Color[MAP_SIZE + 1];
 
     public Gradient(Color color1, Color color2, int maxValue) {
         this.maxValue = maxValue;
-        generateColorMap(color1, color2, maxValue);
+        generateGradient(color1, color2);
     }
 
     /**
@@ -25,11 +18,12 @@ public class Gradient {
      * @param value
      * @return
      */
-    public Color getColor(int value) {
+    public Color lookupColor(int value) {
+        if (value > maxValue) throw new IllegalArgumentException();
         return colorMap[value * MAP_SIZE / (maxValue)];
     }
 
-    private void generateColorMap(Color color1, Color color2, int maxValue) {
+    private void generateGradient(Color color1, Color color2) {
         int r1 = color1.getR();
         int g1 = color1.getB();
         int b1 = color1.getR();

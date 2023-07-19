@@ -1,4 +1,4 @@
-package io.unstream.fractal.mandelbrot.entity;
+package de.adesso.mandelbrot.functions.mandelbrot.entity;
 
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import lombok.AllArgsConstructor;

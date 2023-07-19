@@ -6,12 +6,12 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/min-scale: "3"
+        autoscaling.knative.dev/min-scale: "0"
     spec:
       containers:
         - image: dev.local/mandelbrot:1.0.0
           ports:
-            - containerPort: 8080
+            - containerPort: 8084
           env:
             - name: IMAGE_SERVICE_URL
               value: "http://fractal-faas-images.default.svc.cluster.local/computePng"

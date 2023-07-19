@@ -1,4 +1,4 @@
-package io.unstream.fractal.mandelbrot;
+package de.adesso.mandelbrot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

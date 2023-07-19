@@ -1,4 +1,4 @@
-package io.unstream.fractal.mandelbrot.entity;
+package de.adesso.mandelbrot.functions.images.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

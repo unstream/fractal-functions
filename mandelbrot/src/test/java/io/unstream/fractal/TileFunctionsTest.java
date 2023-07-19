@@ -1,6 +1,8 @@
-package io.unstream.fractal.mandelbrot.functions;
+package io.unstream.fractal;
 
-import io.unstream.fractal.mandelbrot.entity.Fractal;
+import de.adesso.mandelbrot.functions.mandelbrot.entity.Fractal;
+import io.unstream.fractal.TileFunctions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +18,7 @@ class TileFunctionsTest {
         fractal.setC1(1.2);
         fractal.setC1i(0.1);
         long tile = tf.computeTile().apply(fractal);
-        assertEquals(6574, tile);
+        Assertions.assertEquals(6574, tile);
     }
 
     @Test
@@ -28,7 +30,7 @@ class TileFunctionsTest {
         fractal.setC1(-1);
         fractal.setC1i(-1);
         long tile = tf.computeTile().apply(fractal);
-        assertEquals(15, tile);
+        Assertions.assertEquals(15, tile);
     }
     @Test
     void computeTilesTest3() {
@@ -39,6 +41,6 @@ class TileFunctionsTest {
         fractal.setC1(0);
         fractal.setC1i(0);
         long tile = tf.computeTile().apply(fractal);
-        assertEquals(1, tile);
+        Assertions.assertEquals(1, tile);
     }
 }
