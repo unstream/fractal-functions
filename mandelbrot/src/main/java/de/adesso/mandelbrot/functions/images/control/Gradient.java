@@ -53,7 +53,7 @@ public class Gradient {
     private void generateHSVGradient() {
         for (int m = 0; m < MAP_SIZE; m++) {
             int i = m * maxValue / MAP_SIZE;
-            float h = (float) (240f * Math.pow(1f * i / maxValue, 1.5)) % 360;
+            float h = (float) (120 + 240f * Math.pow(1f * i / maxValue, 1.5)) % 360;
             float s = 1f;
             float v = (float) Math.pow(1f * i / maxValue, 0.5);
             colorMap.put(m, ColorTools.HSVtoRGB(h, s, v));

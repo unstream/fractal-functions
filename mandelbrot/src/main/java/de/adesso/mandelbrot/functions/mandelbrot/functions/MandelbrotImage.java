@@ -5,8 +5,7 @@ import de.adesso.mandelbrot.functions.images.entity.ImageData;
 import de.adesso.mandelbrot.functions.mandelbrot.control.ImageServiceClient;
 import de.adesso.mandelbrot.functions.mandelbrot.entity.Fractal;
 import io.swagger.v3.oas.annotations.Operation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +17,10 @@ import java.util.function.Function;
 
 @Component
 public class MandelbrotImage {
-    private final static Logger LOG = LoggerFactory.getLogger(MandelbrotImage.class);
-    private Function<Fractal, ImageData> computeMandelbrotSetFunction;
-    private Function<ImageData, Image> colorizeFunction;
-    private Function<Image, byte[]> createImageFunction;
-    private ImageServiceClient imageServiceClient;
+    private final Function<Fractal, ImageData> computeMandelbrotSetFunction;
+    private final Function<ImageData, Image> colorizeFunction;
+    private final Function<Image, byte[]> createImageFunction;
+    private final ImageServiceClient imageServiceClient;
 
     @Autowired
     public MandelbrotImage(
