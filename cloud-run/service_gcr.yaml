@@ -4,18 +4,17 @@ metadata:
   name: fractal-faas-mandelbrot
 spec:
   template:
-    metadata:
-      annotations:
-        autoscaling.knative.dev/min-scale: "0"
     spec:
       containers:
-        - image: dev.local/mandelbrot:1.0.0
+        - image: europe-west3-docker.pkg.dev/fractal-functions/images/mandelbrot:LATEST
+          resources:
+            limits:
+              memory: 1000Mi
           ports:
             - containerPort: 8084
           env:
             - name: IMAGE_SERVICE_URL
-              value: "http://fractal-faas-images.default.svc.cluster.local/computePng"
+              value: "https://fractal-faas-images-caskxmpsyq-ey.a.run.app/createImage"
 
-              #value: "http://fractal-faas-images.default.svc.cluster.local"
               #value: "http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng"
               #fractal-faas-images.default.cluster.local

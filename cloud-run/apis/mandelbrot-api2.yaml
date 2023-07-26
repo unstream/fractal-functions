@@ -1,0 +1,87 @@
+swagger: '2.0'
+info:
+  license:
+    name: Apache 2.0
+    url: 'http://springdoc.org'
+  title: Mandelbrot API
+  version: 1.0.0
+host: 'localhost:8084'
+schemes:
+  - https
+paths:
+  /computeMandelbrotImage:
+    post:
+      consumes:
+        - application/json
+        - text/plain
+      produces:
+        - application/json
+        - text/plain
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Fractal'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              format: byte
+              type: string
+            type: array
+      description: Generate a PNG image of the Mandelbrot set.
+      operationId: computeMandelbrotImage
+      x-google-backend:
+        address: https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/computeMandelbrotImage
+        deadline: 60.0
+      security:
+        - api_key: [ ]
+
+definitions:
+  Fractal:
+    properties:
+      c0:
+        format: double
+        type: number
+      c0i:
+        format: double
+        type: number
+      c1:
+        format: double
+        type: number
+      c1i:
+        format: double
+        type: number
+      height:
+        format: int32
+        type: integer
+      maxIterations:
+        format: int32
+        type: integer
+      width:
+        format: int32
+        type: integer
+    type: object
+  Quad:
+    properties:
+      data:
+        items:
+          items:
+            format: int32
+            type: integer
+          type: array
+        type: array
+      height:
+        format: int32
+        type: integer
+      width:
+        format: int32
+        type: integer
+    type: object
+
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
