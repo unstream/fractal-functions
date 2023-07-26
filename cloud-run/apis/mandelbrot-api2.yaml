@@ -9,7 +9,7 @@ host: 'localhost:8084'
 schemes:
   - https
 paths:
-  /fastMandelbrot:
+  /computeMandelbrotImage:
     post:
       consumes:
         - application/json
@@ -30,10 +30,10 @@ paths:
               format: byte
               type: string
             type: array
-      description: fastMandelbrot function
-      operationId: fastMandelbrot_POST
+      description: Generate a PNG image of the Mandelbrot set.
+      operationId: computeMandelbrotImage
       x-google-backend:
-        address: https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/fastMandelbrot
+        address: https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/computeMandelbrotImage
         deadline: 60.0
       security:
         - api_key: [ ]

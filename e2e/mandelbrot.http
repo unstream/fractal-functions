@@ -1,0 +1,292 @@
+
+POST http://localhost:8084/computeMandelbrotImage
+Content-Type: image/png
+
+{
+  "c0": -0.5496070882875711,
+  "c0i": -0.6272707068686887,
+  "c1": -0.5496070519168428,
+  "c1i": -0.6272706704979604,
+  "width": 500,
+  "height": 500,
+  "maxIterations":100000
+}
+
+###
+
+POST http://localhost:8084/computeMandelbrotImage
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 500,
+  "height": 500,
+  "maxIterations": 200
+
+}
+
+###
+
+POST http://localhost:8084/computeMandelbrotImage
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -0.5,
+  "c1": -1,
+  "c1i": -0,
+  "width": 500,
+  "height": 500,
+  "maxIterations": 100
+}
+
+###
+
+POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/computeMandelbrotImage
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 500,
+  "height": 500,
+  "maxIterations": 100
+}
+
+###
+POST https://fractal-faas-mandelbrot-caskxmpsyq-ey.a.run.app/computeMandelbrotImage
+Content-Type: image/png
+Authorization: Bearer {{id-token}}
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 100,
+  "height": 100,
+  "maxIterations": 100
+}
+
+
+###
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computeMandelbrotImage?key={{api-key}}
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 300,
+  "height": 300,
+  "maxIterations": 100
+}
+###
+
+
+POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/mandelbrotPng
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 1000
+}
+
+###
+
+POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/createFractal
+Content-Type: image/png
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 1000
+}
+
+
+
+
+###
+
+GET http://localhost:8081/api/v1/mandelbrot?max_iterations=2000&w=2000&h=2000
+Content-Type: image/png
+
+
+###
+POST http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/mandelbrotPng
+Content-Type: image/png
+Authorization: Bearer {{id-token}}
+
+{
+  "c0": -1.5,
+  "c0i": -1,
+  "c1": 0.5,
+  "c1i": 1,
+  "width": 1000,
+  "height": 1000,
+  "maxIterations": 255
+}
+
+###
+
+
+# curl -X 'POST'
+#  'http://localhost:8081/combineImages'
+#  -H 'accept: application/json'
+#  -H 'Content-Type: application/json'
+#  -d '[
+#  {
+#    "height": 0,
+#    "width": 0,
+#    "data": [
+#      "string"
+#    ]
+#  }
+#]'
+POST http://localhost:8081/combineImages
+accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "height": 0,
+    "width": 0,
+    "data": [
+      "@image.jpg"
+    ]
+  }
+]
+
+###
+# curl -X 'POST'
+#  'http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng'
+#  -H 'accept: application/json'
+#  -H 'Content-Type: text/plain'
+#  -d '{
+#  "width": 1,
+#  "data": [
+#    [
+#      100
+#    ]
+#  ],
+#  "height": 1
+#}'
+POST http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng
+Content-Type: image/png
+
+{
+  "width": 1,
+  "data": [
+    [
+      100
+    ]
+  ],
+  "height": 1
+}
+
+###
+
+
+
+POST http://fractal-faas-images.default.127.0.0.1.sslip.io/combineImages
+accept: application/json
+Content-Type: application/json
+
+[
+  {
+    "height": 0,
+    "width": 0,
+    "data": [
+      "@image.jpg"
+    ]
+  }
+]
+
+
+###
+
+
+POST http://localhost:8080/mandelbrot
+Content-Type: text/plain
+
+Ingo
+
+###
+
+POST http://localhost:8081/computePng
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+### images-api-0uj24t637h55t.apigateway.fractal-functions.cloud.goog
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computePng?key={{api-key}}
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+
+###
+POST https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+###
+
+
+
+POST http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng
+Content-Type: image/png
+
+{
+  "data": [
+    [
+      200
+    ]
+  ],
+  "height": 1,
+  "width": 1
+}
+
+###
+fractal-faas-images.default.cluster.local
+{route}.{namespace}.svc.cluster.local

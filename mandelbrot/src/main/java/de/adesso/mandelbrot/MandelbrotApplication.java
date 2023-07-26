@@ -17,12 +17,10 @@ public class MandelbrotApplication {
 	public OpenAPI customOpenAPI(@Value("${springdoc.version}") String appVersion) {
 		return new OpenAPI()
 				.components(new Components())
-				//.addServersItem(new Server().description("MyServer").url("http://localhost:8080/functions/"))
 				.path("functions", new PathItem())
 				.info(new Info().title("Mandelbrot API").version(appVersion)
 						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(MandelbrotApplication.class, args);
 	}

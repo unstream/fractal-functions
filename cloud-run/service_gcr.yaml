@@ -14,7 +14,7 @@ spec:
             - containerPort: 8084
           env:
             - name: IMAGE_SERVICE_URL
-              value: "https://fractal-faas-images-caskxmpsyq-ey.a.run.app/computePng"
+              value: "https://fractal-faas-images-caskxmpsyq-ey.a.run.app/createImage"
 
               #value: "http://fractal-faas-images.default.127.0.0.1.sslip.io/computePng"
               #fractal-faas-images.default.cluster.local

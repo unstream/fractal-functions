@@ -1,4 +1,4 @@
-import http from 'k6/http';
+import http from 'e2e/k6/http';
 
 export const options = {
   scenarios: {

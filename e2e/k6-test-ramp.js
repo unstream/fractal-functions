@@ -6,8 +6,8 @@ export const options = {
       executor: 'ramping-vus',
       startVUs: 1,
       stages: [
-        {target: 100, duration: '5m'},
-        {target: 100, duration: '5m'},
+        {target: 200, duration: '2m'},
+        {target: 200, duration: '2m'},
       ],
       gracefulRampDown: '0s',
     }
@@ -21,7 +21,8 @@ export default function () {
     "width": 300,"height": 300, "maxIterations": 300
   };
   let host = 'https://fractal-gateway-8191wl1t.nw.gateway.dev';
-  let res = http.post(host + `/fastMandelbrot?key=${__ENV.API_KEY}`,
+
+  let res = http.post(host + `/computeMandelbrotImage?key=${__ENV.API_KEY}`,
       JSON.stringify(fractal), {
     headers: { 'Content-Type': 'image/png' },
   });

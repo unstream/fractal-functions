@@ -24,11 +24,15 @@ public class MandelbrotData {
     private final static Logger LOG = LoggerFactory.getLogger(MandelbrotData.class);
 
     @RouterOperations(value = {
-            @RouterOperation(method = RequestMethod.POST, operation	= @Operation(
-                    description = "Compute the mandelbrot set data with the iteration count per set point",
-                    tags = "mandelbrot")),
-            @RouterOperation(method = RequestMethod.GET, operation = @Operation(hidden = true))
-    })@Bean
+            @RouterOperation(method = RequestMethod.POST,
+                    operation	= @Operation(
+                            description = "Compute the mandelbrot set data " +
+                                    "with the iteration count per set point",
+                            tags = "mandelbrot")),
+            @RouterOperation(method = RequestMethod.GET,
+                    operation = @Operation(hidden = true))
+    })
+    @Bean
     public Function<Fractal, ImageData> computeMandelbrotSet(){
         return fractal -> {
             long now = System.currentTimeMillis();

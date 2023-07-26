@@ -13,4 +13,7 @@ public class Color {
     private int r;
     private int g;
     private int b;
+    public String toString() {
+        return "" + r + " " + g + " " +b;
+    }
 }
