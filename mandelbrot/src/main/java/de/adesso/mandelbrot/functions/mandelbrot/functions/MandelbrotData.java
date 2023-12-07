@@ -5,23 +5,30 @@ import de.adesso.mandelbrot.functions.images.functions.ImageFunction;
 import de.adesso.mandelbrot.functions.mandelbrot.entity.Fractal;
 import de.adesso.mandelbrot.functions.mandelbrot.entity.IterationParameters;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
 @Component
+@Slf4j
 public class MandelbrotData {
 
-    private final static Logger LOG = LoggerFactory.getLogger(MandelbrotData.class);
+    @Value("${use-virtual-threads}")
+    boolean useVirutalThreads;
 
     @RouterOperations(value = {
             @RouterOperation(method = RequestMethod.POST,
@@ -33,6 +40,7 @@ public class MandelbrotData {
                     operation = @Operation(hidden = true))
     })
     @Bean
+
     public Function<Fractal, ImageData> computeMandelbrotSet(){
         return fractal -> {
             long now = System.currentTimeMillis();
@@ -48,7 +56,7 @@ public class MandelbrotData {
             var xstep = width / fractal.getWidth();
             var ystep = height / fractal.getHeight();
 
-            var executor = Executors.newFixedThreadPool(25);
+            var executor = Executors.newVirtualThreadPerTaskExecutor();
 
             try  {
                 IntStream.rangeClosed(0, fractal.getWidth() - 1).forEach(x -> {
@@ -62,16 +70,19 @@ public class MandelbrotData {
                     });
                 });
             } catch (RuntimeException re) {
-                LOG.error(re.getMessage(), re);
+                log.error(re.getMessage(), re);
             } finally {
                 try {
                     executor.shutdown();
-                    executor.awaitTermination(600, TimeUnit.SECONDS);
+                    if (!executor.awaitTermination(600, TimeUnit.SECONDS)) {
+                        throw new RuntimeException("Timeout while computing fractal.");
+                    }
+
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
-            LOG.info("Fractal computed in " + (System.currentTimeMillis() -now) + " ms.");
+            log.info("Fractal computed in " + (System.currentTimeMillis() -now) + " ms.");
             return data;
         };
     }

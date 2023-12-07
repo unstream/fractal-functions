@@ -7,6 +7,10 @@ The following commands assume development on Mac OS.
 ```
 kn quickstart kind
 ```
+### Install knative on Mac OS initially
+```
+kn quickstart kind --registry
+```
 ### Build the application locally
 ```
 cd mandelbrot
@@ -34,7 +38,7 @@ kind export logs --name knative
 ## Run local load tests with hey
 ```
 cd e2e
-hey -n 100 -c 10 -m POST -t 0 -T image/png -D fractal100.json \
+Manuell nach Deployment \
 http://fractal-faas-mandelbrot.default.127.0.0.1.sslip.io/createFractal
 ```
 
@@ -59,4 +63,7 @@ cd e2e
 ./k6 run --out dashboard -e API_KEY=$API_KEY k6-test-ramp.js
 ```
 
-
+### Test with hey
+```
+hey -n 1000 -c 50 -m POST –t 0 -T image/png -D fractal1000.json http://localhost:8084/computeMandelbrotImage
+```

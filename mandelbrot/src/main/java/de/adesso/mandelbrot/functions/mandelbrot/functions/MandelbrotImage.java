@@ -46,7 +46,11 @@ public class MandelbrotImage {
 
     @Bean
     public Function<Fractal, byte[]> computeMandelbrotImage() {
-        return computeMandelbrotSetFunction.andThen(colorizeFunction).andThen(createImageFunction);
+        return fractal -> {
+            computeMandelbrotSetFunction.apply(fractal);
+            return new byte[0];
+        };
+        //return computeMandelbrotSetFunction.andThen(colorizeFunction).andThen(createImageFunction);
     }
 
 

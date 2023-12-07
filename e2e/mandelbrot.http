@@ -1,4 +1,5 @@
 
+
 POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computeMandelbrotImage?key={{api-key}}
 Content-Type: image/png
 
@@ -14,7 +15,21 @@ Content-Type: image/png
 
 
 ###
+POST https://fractal-gateway-8191wl1t.nw.gateway.dev/computeMandelbrotImage?key={{api-key}}
+Content-Type: image/png
 
+{
+  "c0": -0.5496070882875711,
+  "c0i": -0.6272707068686887,
+  "c1": -0.5496070519168428,
+  "c1i": -0.6272706704979604,
+  "width": 500,
+  "height": 500,
+  "maxIterations":100000
+}
+
+
+###
 POST http://localhost:8084/computeMandelbrotImage
 Content-Type: image/png
 

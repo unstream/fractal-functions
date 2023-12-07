@@ -12,10 +12,14 @@ server:
   port: 8084
 
 spring:
-  #  cloud:
+#  cloud:
 #    function:
 #      web:
 ##        path: /functions
+  threads:
+    virtual:
+      enabled: true
   codec:
     max-in-memory-size: 10MB
+
 

@@ -3,7 +3,7 @@
   "c0i": -1,
   "c1": 0.5,
   "c1i": 1,
-  "width": 300,
-  "height": 300,
-  "maxIterations": 300
+  "width": 10,
+  "height": 10,
+  "maxIterations": 10
 }
